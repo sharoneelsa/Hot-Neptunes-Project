@@ -36,6 +36,11 @@
 
 
 &eos
+    read_extra_eos_inlist(1) = .true.
+    extra_eos_inlist_name(1) = 'inlist_shared'
+    eosDT_use_linear_interp_for_X = .true.
+    ! something like read_extra_eos_job_inlist(1) = .true.
+    ! something like extra_eos_job_inlist_name(1) = 'inlist_shared'
 / ! end of eos namelist
 
 
