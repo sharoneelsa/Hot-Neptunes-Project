@@ -28,7 +28,7 @@
       ! controls for adding core of a certain density (alternatively, could fix radius)
       relax_core = .true.
       new_core_mass = 1.47e-04 ! 10.19 Mearth in Msun units
-      core_avg_rho = 17.5d0 ! g/cm^3
+      core_avg_rho = 17.5d0 ! g/cm^3  !JJ comment: why is this density so high? A M_core = 10 M_earth planet should have a density of ~10 g/cm^3 if R ~ M^1/4
       core_avg_eps = 0.d0 ! ergs/g/sec
       dlg_core_mass_per_step = 0.05d0     ! decrease if convergence problems
       relax_core_years_for_dt = 0.1d0     ! increase(?) if convergence problems
