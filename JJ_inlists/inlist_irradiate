@@ -1,0 +1,104 @@
+! inlist_irradiate
+
+&star_job
+
+
+      show_log_description_at_start = .false.
+
+      load_saved_model = .true.
+      !load_model_filename = "planet_core_1.0_MJ_10.0_ME_2.0_RJ.mod"
+      !load_model_filename = "planet_core_13.0315_MJ_10.0_ME_5.0_RJ.mod"
+      load_model_filename = "planet_strip_models/planet_strip_0.0314764712042_MJ.mod"
+
+      save_model_when_terminate = .true.
+      !save_model_filename = "planet_irradiate_1.0_MJ_10.0_ME_2.0_RJ.mod"
+      !save_model_filename = "planet_irradiate_13.0315_MJ_10.0_ME_5.0_RJ.mod"
+      save_model_filename = "planet_irradiate_models/planet_irradiate_0.0314764712042_MJ.mod"
+      required_termination_code_string = 'max_age'
+      
+      change_initial_net = .true.      
+      new_net_name = 'basic.net'
+      
+      relax_initial_irradiation = .true.
+      relax_irradiation_min_steps = 200
+      relax_irradiation_max_yrs_dt = 1d-1
+
+      relax_to_this_irrad_flux = 2.5d8 ! erg s^-1 cm^-2, 2.5d8 corresponds to planet at 2.6 day orbiting sun
+      irrad_col_depth = 250.0d0 ! g cm^-2
+
+      !relax_to_this_tau_factor = 10
+      !dlogtau_factor = 0.01d0
+      !relax_initial_tau_factor = .false.
+      
+      set_initial_model_number = .true.
+      initial_model_number = 0
+
+      !set_initial_cumulative_energy_error = .true.
+      !new_cumulative_energy_error = 0d0
+      
+      !pgstar_flag = .true.
+
+/ !end of star_job
+
+
+&eos
+/ ! end of eos namelist
+
+
+&kap
+      Zbase = 0.02d0
+
+      kap_file_prefix = 'gs98'
+      kap_lowT_prefix = 'lowT_Freedman11'
+      use_Type2_opacities = .false.
+
+/ ! end of kap namelist
+
+&controls
+
+  mesh_delta_coeff = 3.0d0
+  !steps_before_use_gold2_tolerances = 30
+  warn_when_large_virial_thm_rel_err = 5d-2
+
+  energy_eqn_option = 'dedt'
+  use_gold2_tolerances = .true.
+
+   ! limit max_model_number as part of test_suite
+   max_model_number = 200
+
+	! for create_initial_model
+	initial_Z = 0.02d0
+	initial_Y = 0.24d0
+
+
+	! when to stop
+   max_age = 1.0d5
+
+	! knobs
+	T_mix_limit = 0d0
+      
+
+	! output to files and terminal
+	photo_interval = 50
+	profile_interval = 50
+	max_num_profile_models=1000
+	history_interval = 2
+	terminal_interval = 10
+	write_header_frequency = 10
+	
+	!report_solver_progress = .true. ! set true to see info about newton iterations
+  report_ierr = .true. ! if true, produce terminal output when have some internal error
+
+/
+
+
+&pgstar
+         
+      ! top level controls
+
+         !pause = .true. 
+            ! if true, the code waits for user to enter a RETURN on the command line
+      
+
+
+/ ! end of pgstar namelist
