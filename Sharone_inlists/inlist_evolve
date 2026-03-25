@@ -67,8 +67,8 @@
 
 	    ! knobs
 	    T_mix_limit = 0
-      atm_option = 'fixed_Psurf'
-      atm_fixed_Psurf = 1.0d6
+      atm_option = 'fixed_Psurf'  !JJ comment: eventually want to comment out and do "default" atm option
+      atm_fixed_Psurf = 1.0d6     !JJ comment: eventually want to comment out and do "default" atm option
       !atm_fixed_Psurf = 1.0d5
       !atm_fixed_Psurf = 2.0d4
       !atm_fixed_Psurf = 2.5d5
