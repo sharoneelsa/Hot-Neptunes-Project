@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# this provides the definition of do_one (run one part of test)
+# do_one [inlist] [output model] [LOGS directory]
+source "${MESA_DIR}/star/test_suite/test_suite_helpers"
+
+date "+DATE: %Y-%m-%d%n TIME: %H:%M:%S"
+
+# Creating subJovian planets
+#do_one inlist_create_header planet_create_13_MJ_5.0_RJ.mod
+#do_one inlist_core_header planet_core_13.0315_MJ_10.0_ME_5.0_RJ.mod
+#do_one inlist_strip_header planet_strip_models/planet_strip_0.0314764712042_MJ.mod
+#do_one inlist_irradiate_header planet_irradiate_models/planet_irradiate_0.0314764712042_MJ.mod
+do_one inlist_evolve_header planet_evolve_models/planet_evolve_0.0314979688225_MJ.mod
+
+
+echo 'finished'
