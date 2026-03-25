@@ -1,0 +1,118 @@
+! inlist_evolve
+
+&star_job
+
+      set_initial_age = .true.
+      initial_age = 0
+      set_initial_model_number = .true.
+      initial_model_number = 0
+
+      show_log_description_at_start = .false.
+
+      load_saved_model = .true.
+      load_model_filename = "planet_irradiate_models/planet_irradiate_0.0314979688225_MJ.mod"
+
+      save_model_when_terminate = .true.
+      save_model_filename = "planet_evolve_models/planet_evolve_0.0314979688225_MJ.mod"
+      required_termination_code_string = 'max_age'
+      
+      change_initial_net = .true.      
+      new_net_name = 'basic.net'
+
+      set_initial_cumulative_energy_error = .true.
+      new_cumulative_energy_error = 0d0
+      
+      !pgstar_flag = .true.
+
+/ !end of star_job
+
+
+&eos
+/ ! end of eos namelist
+
+
+&kap
+      Zbase = 0.02d0
+
+      kap_file_prefix = 'gs98'
+      kap_lowT_prefix = 'lowT_Freedman11'
+
+/ ! end of kap namelist
+
+&controls
+
+      log_directory = "LOGS_evolve/LOGS_0.0314979688225_MJ"
+      write_pulse_data_with_profile = .true.
+      pulse_data_format = 'GYRE'
+      star_history_name = 'history_evolve.data'
+
+      use_gold2_tolerances = .false.
+      steps_before_use_gold2_tolerances = 30
+      warn_when_large_virial_thm_rel_err = 5d-2
+      mesh_delta_coeff = 3.0d0
+
+      energy_eqn_option = 'dedt'
+      max_years_for_timestep = 5.0d6
+
+      num_trace_history_values = 2
+      trace_history_value_name(1) = 'rel_E_err'
+      trace_history_value_name(2) = 'log_rel_run_E_err'
+
+      ! limit max_model_number as part of test_suite
+      max_model_number = 30000
+
+	    ! when to stop
+	    max_age = 1d9
+	    !Teff_lower_limit = 100.d0
+
+	    ! knobs
+	    T_mix_limit = 0
+	    
+	    !report_solver_progress = .true. ! set true to see info about newton iterations
+      report_ierr = .true. ! if true, produce terminal output when have some internal error
+
+	    ! output to files and terminal
+	    photo_interval = 10
+	    profile_interval = 10
+	    max_num_profile_models=3000
+	    history_interval = 1
+	    terminal_interval = 10
+	    write_header_frequency = 1
+
+	    ! surface heating
+	    column_depth_for_irradiation = 250.d0 ! 3.d2 cm^2/g
+      irradiation_flux = 2.5d8 ! erg s^-1 cm^-2, 2.5d8 corresponds to planet at 2.6 day orbiting sun
+      
+	    ! modiefied surface boundary condition from atmosphere + inputs
+	    !use_other_surface_PT = .true.
+	    !x_ctrl(4) = 0.25d0                ! f
+	    !x_ctrl(5) = 0.6666666666666667d0  ! tau photosphere
+	    !x_ctrl(6) = 0.6d0                 ! gamma = kap_v/kap_th
+	    !atm_irradiated_kap_v = 6.0d-3     ! kap_v
+	    !atm_irradiated_kap_v_div_kap_th = 0.6d0 ! gamma
+
+	    ! interior heating
+	    !inject_uniform_extra_heat = 0.0
+	    use_other_energy = .true.
+	    
+	    ! Core inputs
+	    x_ctrl(1) = 1.0d7        ! cv_core
+	    x_ctrl(2) = 5.968d28     ! M_core
+	    x_ctrl(3) = 0.0d0        ! L_radio (erg/s)
+	    
+	    
+	   
+
+/
+
+
+&pgstar
+         
+      ! top level controls
+
+         !pause = .true. 
+            ! if true, the code waits for user to enter a RETURN on the command line
+      
+
+
+/ ! end of pgstar namelist
