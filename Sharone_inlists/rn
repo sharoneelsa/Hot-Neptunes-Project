@@ -1,0 +1,46 @@
+#!/bin/bash
+
+TAG="Corot8b"   
+function check_okay {
+	if [ $? -ne 0 ]
+	then
+		exit 1
+	fi
+}
+
+function do_one {
+	cp $1 inlist
+	check_okay
+	rm -rf $2
+	echo 'run' $1
+	./rn1
+	check_okay
+  if [ ! -r $2 ]
+  then
+  	echo
+  	echo "******************************************************************"
+  	echo 'Failed to create' $2 'when running' $1
+  	echo "******************************************************************"
+  	echo
+  	exit 1
+  fi
+  if [ -d LOGS ]
+  then
+  	rm -rf LOGS_${TAG}
+  	cp -r LOGS LOGS_${TAG}
+  fi
+  echo
+  echo 'Finished' $1
+  echo
+	echo '***'
+	echo '***'
+	echo '***'
+	echo
+}
+
+
+do_one inlist_create planet_create.mod
+do_one inlist_core planet_core.mod
+do_one inlist_irradiate planet_irradiate.mod
+do_one inlist_strip planet_strip.mod
+do_one inlist_evolve planet_evolve.mod
