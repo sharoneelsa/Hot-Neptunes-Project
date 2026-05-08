@@ -59,7 +59,7 @@
       trace_history_value_name(2) = 'log_rel_run_E_err'
 
       ! limit max_model_number as part of test_suite
-      max_model_number = 20000
+      max_model_number = 200000 ! make the max_model number very high so it evovled until end of 5 Gyr or more (?)
 
 	    ! when to stop
 	    max_age = 5d9
