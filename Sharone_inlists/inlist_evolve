@@ -77,11 +77,11 @@
       report_ierr = .true. ! if true, produce terminal output when have some internal error
 
 	    ! output to files and terminal
-	    photo_interval = 10
-	    profile_interval = 10
+	    photo_interval = 1000
+	    profile_interval = 1000
 	    max_num_profile_models=500
-	    history_interval = 1
-	    terminal_interval = 10
+	    history_interval = 50
+	    terminal_interval = 100
 	    write_header_frequency = 1
 
 	    ! surface heating
